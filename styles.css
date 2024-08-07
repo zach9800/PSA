@@ -103,27 +103,4 @@ button:hover {
     overflow-y: auto;
 }
 
-/* Ensures the modal is hidden when not in use */
-.hidden {
-    display: none;
-}
-
-/* Table styling for PSA scripts */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd; /* Light gray border */
-}
-
-tr:last-child td {
-    border-bottom: none;
-}
-
-td strong {
-    color: #2c3e50; /* Dark blue-gray for scene titles */
-}
+/* Ensures the modal is hidden when not
