@@ -34,12 +34,16 @@
       };
 
       // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
+      firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
+
+      // Load and display PSAs from Firestore on page load
+      document.addEventListener('DOMContentLoaded', async () => {
+          await fetchPSAs();
+      });
     </script>
 
     <!-- Custom JS -->
     <script src="scripts.js"></script>
 </body>
 </html>
-
