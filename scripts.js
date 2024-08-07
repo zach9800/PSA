@@ -1,5 +1,3 @@
-import { collection, getDocs, setDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
-
 // Define an array of colors to use for PSAs
 const colors = ["#ff6b6b", "#6bffb6", "#6b6bff", "#ffff6b", "#ff6bff"];
 
@@ -86,7 +84,7 @@ let psas = [
 // Function to fetch PSAs from Firestore
 async function fetchPSAs() {
     try {
-        const querySnapshot = await getDocs(collection(db, "psas"));
+        const querySnapshot = await firebase.firestore().collection("psas").get();
         const savedPsas = [];
         querySnapshot.forEach((doc) => {
             savedPsas.push(doc.data());
@@ -104,7 +102,7 @@ async function fetchPSAs() {
 // Function to save PSA to Firestore
 async function savePSAToFirebase(psa) {
     try {
-        await setDoc(doc(db, "psas", psa.title), psa);
+        await firebase.firestore().collection("psas").doc(psa.title).set(psa);
     } catch (error) {
         console.error("Error saving PSA:", error);
     }
