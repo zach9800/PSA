@@ -17,30 +17,27 @@
 
     <button id="add-psa">Add New PSA</button>
 
-    <!-- Firebase SDKs -->
+    <!-- Firebase App (the core Firebase SDK) -->
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js"></script>
 
     <script>
-      // Your web app's Firebase configuration
-      const firebaseConfig = {
-         apiKey: "AIzaSyAp6Cs50J5Zdq8GSywVN1oQa9webzFJ8Go",
-         authDomain: "psa-showcase-2.firebaseapp.com",
-         projectId: "psa-showcase-2",
-         storageBucket: "psa-showcase-2.appspot.com",
-         messagingSenderId: "165758664577",
-         appId: "1:165758664577:web:1a8406a63f0d7ddc4df280",
-         measurementId: "G-V4L2S7CC6K"
-      };
+        // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAp6Cs50J5Zdq8GSywVN1oQa9webzFJ8Go",
+            authDomain: "psa-showcase-2.firebaseapp.com",
+            projectId: "psa-showcase-2",
+            storageBucket: "psa-showcase-2.appspot.com",
+            messagingSenderId: "165758664577",
+            appId: "1:165758664577:web:1a8406a63f0d7ddc4df280",
+            measurementId: "G-V4L2S7CC6K"
+        };
 
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
 
-      // Load and display PSAs from Firestore on page load
-      document.addEventListener('DOMContentLoaded', async () => {
-          await fetchPSAs();
-      });
+        // Initialize Firestore
+        const db = firebase.firestore();
     </script>
 
     <!-- Custom JS -->
