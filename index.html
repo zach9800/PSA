@@ -5,50 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PSA Showcase</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="conta">
-            <div class="bl-main" id="bl-main">
-                <section>
-                    <div class="bl-box">
-                        <h2>PSA Scripts</h2>
-                    </div>
-                    <div class="bl-content">
-                        <h2>Scripts</h2>
-                        <ul id="psa-list" class="bl-panel-items">
-                            <!-- PSA items will be dynamically inserted here -->
-                        </ul>
-                    </div>
-                    <span class="bl-icon bl-icon-close">Close</span>
-                </section>
-
-                <section>
-                    <div class="bl-box">
-                        <h2>Add New PSA</h2>
-                    </div>
-                    <div class="bl-content">
-                        <h2>Create a New PSA</h2>
-                        <form id="new-psa-form">
-                            <input type="text" id="psa-title" placeholder="PSA Title" required />
-                            <textarea id="psa-script" placeholder="PSA Script" required></textarea>
-                            <button type="button" id="save-new-psa">Save PSA</button>
-                        </form>
-                    </div>
-                    <span class="bl-icon bl-icon-close">Close</span>
-                </section>
-            </div>
-        </div>
-    </div>
-    
-    <script src="boxlayout.js"></script>
+    <header>
+        <h1>PSA Showcase</h1>
+    </header>
+    <main id="psa-list">
+        <!-- PSA cards will be dynamically inserted here -->
+    </main>
+    <section id="new-psa-form" class="hidden">
+        <input type="text" id="psa-title" placeholder="PSA Title">
+        <textarea id="psa-script" placeholder="PSA Script"></textarea>
+        <button id="save-new-psa">Save PSA</button>
+    </section>
+    <button id="add-psa">Add New PSA</button>
     <script src="scripts.js"></script>
-    <script>
-        $(function() {
-            Boxlayout.init();
-        });
-    </script>
 </body>
 </html>
+
