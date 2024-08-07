@@ -1,4 +1,3 @@
-/* Global Styles */
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background-color: #f4f4f9;
@@ -8,10 +7,8 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, #f4f4f9, #e1e5ea);
 }
 
-/* Header Styling */
 header {
     background-color: #007BFF;
     color: white;
@@ -27,17 +24,22 @@ h1 {
     font-weight: normal;
 }
 
-/* Main Container */
+/* Main container to center the PSA cards */
 main {
     padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center; /* Center the PSA cards */
-    width: 100%; /* Ensure it takes up the full width */
-    box-sizing: border-box;
 }
 
-/* PSA Item Styling */
+/* Wrapper to hold both script and comment sections side by side */
+.psa-content-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+/* PSA item styling for a very wide, centered card */
 .psa-item {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -45,32 +47,23 @@ main {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 95%; /* Take up 95% of the viewport width */
-    max-width: 1200px; /* Ensure it doesn't get too wide on large screens */
+    max-width: 1400px; /* Ensure it doesn't get too wide on large screens */
     box-sizing: border-box;
     text-align: left;
     transition: box-shadow 0.3s ease, height 0.3s ease;
-    margin-bottom: 20px;
 }
 
-/* PSA Content Layout */
-.psa-content-wrapper {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-}
-
+/* Flexbox layout to stack elements inside PSA item */
 .psa-content {
     display: flex;
     flex-direction: column;
     width: 65%; /* Script takes up 65% of the width */
-    box-sizing: border-box;
-    padding-right: 10px;
 }
 
-/* Comment Section Layout */
+/* Comment box takes up 30% of the width */
 .comments-box {
     width: 30%;
+    margin-left: 20px;
     border: 2px solid #ddd;
     border-radius: 8px;
     padding: 10px;
@@ -110,10 +103,9 @@ main {
     padding: 5px 0;
 }
 
-/* New PSA Form */
 #new-psa-form {
     width: 95%; /* Full width of its container */
-    max-width: 1200px; /* Keep a max width for larger screens */
+    max-width: 1400px; /* Keep a max width for larger screens */
     padding: 20px;
     margin: 20px 0;
     background-color: #fff;
@@ -122,7 +114,7 @@ main {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Script Box */
+/* Script box expands to fill width, stacked vertically */
 .script-box {
     border: 2px solid #ddd; /* Default border color */
     border-radius: 8px;
@@ -136,7 +128,7 @@ main {
     margin-bottom: 20px; /* Add more space below the script box */
 }
 
-/* Table Styling */
+/* Ensure table inside script box fits the width and adds spacing between rows */
 table {
     width: 100%;
     table-layout: fixed; /* Ensures table cells fit the width */
@@ -147,37 +139,27 @@ table td {
     padding: 10px 5px; /* Adds padding inside each cell */
 }
 
-/* Button Styles */
-button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
+.psa-item, header, button, input, textarea {
+    margin-bottom: 20px;
+    padding: 15px;
 }
 
-button:hover {
-    background-color: #0056b3;
+.psa-item {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
 
-.save-btn {
-    background-color: #28a745;
-    margin-top: 20px;
+.psa-item:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.save-btn:hover {
-    background-color: #218838;
+input:focus, textarea:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
 }
 
-.save-btn.hidden {
-    display: none;
-}
-
-/* PSA Title Styling */
+/* Styling the saved PSA title */
 .psa-title-saved {
     font-weight: bold;
     font-size: 1.6em;
@@ -185,20 +167,27 @@ button:hover {
     margin-bottom: 20px; /* Add space below the title */
 }
 
-/* Hidden Class for Show/Hide Elements */
-.hidden {
+/* Adjust spacing around the save button */
+.save-btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px; /* Add space below the save button */
+}
+
+.save-btn.hidden {
     display: none;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .psa-content {
-        width: 60%;
-    }
-
-    .comments-box {
-        width: 35%;
-    }
+/* Hide comments by default or when toggled off */
+.hidden {
+    display: none;
 }
 
 @media (max-width: 768px) {
@@ -212,18 +201,7 @@ button:hover {
     }
 }
 
-@media (max-width: 480px) {
-    h1 {
-        font-size: 1.5em;
-    }
-
-    button {
-        font-size: 0.9em;
-        padding: 8px 15px;
-    }
-
-    .psa-title-saved {
-        font-size: 1.4em;
-    }
+body {
+    background: linear-gradient(135deg, #f4f4f9, #e1e5ea);
+    color: #333;
 }
-
