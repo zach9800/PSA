@@ -11,11 +11,8 @@ const firebaseConfig = {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-
-// Initialize Firestore
 const db = firebase.firestore();
 
-const colors = ["#ff6b6b", "#6bffb6", "#6b6bff", "#ffff6b", "#ff6bff"];
 let psas = [];
 
 async function fetchPSAs() {
@@ -33,13 +30,12 @@ function displayPSAs() {
     psaList.innerHTML = "";
 
     psas.forEach((psa, index) => {
-        const psaItem = document.createElement("div");
+        const psaItem = document.createElement("li");
         psaItem.className = "psa-item";
         psaItem.innerHTML = `
             <h3 contenteditable="true" oninput="showSaveButton(${index})">${psa.title}</h3>
             <button onclick="toggleScript(${index})">Show/Hide Script</button>
-            <div id="overlay-${index}" class="overlay hidden"></div>
-            <div id="script-${index}" class="script-box hidden" style="border-color: ${psa.color};">
+            <div id="script-${index}" class="script-box hidden">
                 <table contenteditable="true" onkeydown="handleEnterKey(event, ${index})" oninput="showSaveButton(${index})">${psa.script}</table>
                 <button id="save-${index}" class="save-btn hidden" onclick="savePSA(${index})">Save</button>
             </div>
@@ -48,68 +44,66 @@ function displayPSAs() {
     });
 }
 
-// Handle the Enter key to create a new row in the table
-function handleEnterKey(event, index) {
-    if (event.key === 'Enter') {
-        event.preventDefault();
-        
-        const table = document.querySelector(`#script-${index} table`);
-        const selection = window.getSelection();
-        const range = selection.getRangeAt(0);
-        const selectedNode = range.startContainer.nodeType === 3 ? range.startContainer.parentNode : range.startContainer;
-        const currentRow = selectedNode.closest('tr');
-        
-        const newRow = document.createElement('tr');
-        newRow.innerHTML = `
-            <td contenteditable="true"><strong>New Scene:</strong></td>
-            <td contenteditable="true">"New script content..."</td>
-        `;
-        
-        currentRow.parentNode.insertBefore(newRow, currentRow.nextSibling);
-        
-        showSaveButton(index);
-    }
-}
-
-// Toggle script visibility with fullscreen modal
-function toggleScript(index) {
-    const scriptDiv = document.getElementById(`script-${index}`);
-    const overlay = document.getElementById(`overlay-${index}`);
-    
-    if (scriptDiv.classList.contains('hidden')) {
-        scriptDiv.classList.remove('hidden');
-        overlay.classList.remove('hidden');
-    } else {
-        scriptDiv.classList.add('hidden');
-        overlay.classList.add('hidden');
-    }
-}
-
-// Show save button when content is edited
-function showSaveButton(index) {
-    const saveBtn = document.getElementById(`save-${index}`);
-    saveBtn.classList.remove('hidden');
-}
-
-// Save a PSA to Firestore
 async function savePSA(index) {
     const title = document.querySelector(`#psa-list .psa-item:nth-child(${index + 1}) h3`).innerText;
     const script = document.querySelector(`#script-${index} table`).innerHTML;
 
     psas[index].title = title;
-    psas[index.script] = script;
+    psas[index].script = script;
 
     try {
         await db.collection("psas").doc(psas[index].title).set(psas[index]);
-        const saveBtn = document.getElementById(`save-${index}`);
-        saveBtn.classList.add('hidden');
         alert("PSA saved successfully!");
+        document.getElementById(`save-${index}`).classList.add('hidden');
     } catch (error) {
         console.error("Error saving PSA:", error);
         alert("Failed to save PSA. Please try again.");
     }
 }
 
-// Fetch PSAs on page load
+document.getElementById('save-new-psa').addEventListener('click', () => {
+    const title = document.getElementById('psa-title').value;
+    const script = document.getElementById('psa-script').value;
+
+    if (title && script) {
+        const newPSA = {
+            title: title,
+            script: `
+            <tr>
+                <td><strong>Scene 1:</strong> ${title}</td>
+                <td>${script}</td>
+            </tr>
+            `
+        };
+
+        psas.push(newPSA);
+        savePSA(psas.length - 1);
+        displayPSAs();
+        
+        document.getElementById('psa-title').value = '';
+        document.getElementById('psa-script').value = '';
+    }
+});
+
 document.addEventListener('DOMContentLoaded', fetchPSAs);
 
+function handleEnterKey(event, index) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        const table = document.querySelector(`#script-${index} table`);
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `<td contenteditable="true"><strong>New Scene:</strong></td><td contenteditable="true">New script content...</td>`;
+        table.appendChild(newRow);
+        showSaveButton(index);
+    }
+}
+
+function toggleScript(index) {
+    const scriptDiv = document.getElementById(`script-${index}`);
+    scriptDiv.classList.toggle('hidden');
+}
+
+function showSaveButton(index) {
+    const saveBtn = document.getElementById(`save-${index}`);
+    saveBtn.classList.remove('hidden');
+}
