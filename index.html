@@ -17,30 +17,18 @@
 
     <button id="add-psa">Add New PSA</button>
 
-    <!-- Firebase App (the core Firebase SDK) -->
+    <!-- Form for creating a new PSA -->
+    <div id="new-psa-form" class="hidden">
+        <input type="text" id="psa-title" placeholder="Enter PSA Title">
+        <textarea id="psa-script" placeholder="Enter PSA Script"></textarea>
+        <button id="save-new-psa">Save PSA</button>
+    </div>
+
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
-    <script>
-        // Your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyAp6Cs50J5Zdq8GSywVN1oQa9webzFJ8Go",
-            authDomain: "psa-showcase-2.firebaseapp.com",
-            projectId: "psa-showcase-2",
-            storageBucket: "psa-showcase-2.appspot.com",
-            messagingSenderId: "165758664577",
-            appId: "1:165758664577:web:1a8406a63f0d7ddc4df280",
-            measurementId: "G-V4L2S7CC6K"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-
-        // Initialize Firestore
-        const db = firebase.firestore();
-    </script>
-
-    <!-- Custom JS -->
+    <!-- Your custom scripts -->
     <script src="scripts.js"></script>
 </body>
 </html>
