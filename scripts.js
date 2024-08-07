@@ -1,4 +1,4 @@
-// Your Firebase configuration
+// Initialize Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAp6Cs50J5Zdq8GSywVN1oQa9webzFJ8Go",
   authDomain: "psa-showcase-2.firebaseapp.com",
@@ -9,7 +9,6 @@ const firebaseConfig = {
   measurementId: "G-V4L2S7CC6K"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
@@ -129,3 +128,4 @@ function handleEnterKey(event, index) {
 }
 
 document.addEventListener('DOMContentLoaded', fetchPSAs);
+
