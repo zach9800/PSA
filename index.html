@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSA Showcase</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>PSA Showcase</h1>
-    </header>
-    <main id="psa-list">
-        <!-- PSA cards will be dynamically inserted here -->
-    </main>
-    <section id="new-psa-form" class="hidden">
-        <input type="text" id="psa-title" placeholder="PSA Title">
-        <textarea id="psa-script" placeholder="PSA Script"></textarea>
-        <button id="save-new-psa">Save PSA</button>
-    </section>
+<div class="container">
+    <h1>PSA Showcase</h1>
+    <div id="psa-list">
+        <!-- Existing PSAs will be listed here -->
+    </div>
+
     <button id="add-psa">Add New PSA</button>
+
+    <div id="new-psa-form" class="hidden">
+        <input type="text" id="psa-title" placeholder="Enter PSA Title">
+        <table id="psa-script-table">
+            <tr>
+                <td><strong>Scene 1:</strong></td>
+                <td contenteditable="true">Enter script content here...</td>
+            </tr>
+        </table>
+        <button id="save-new-psa">Save PSA</button>
+    </div>
+</div>
 
     <!-- Load Firebase libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
