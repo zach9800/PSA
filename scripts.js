@@ -9,7 +9,10 @@ const firebaseConfig = {
   measurementId: "G-V4L2S7CC6K"
 };
 
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+
+// Initialize Firestore
 const db = firebase.firestore();
 
 const colors = ["#ff6b6b", "#6bffb6", "#6b6bff", "#ffff6b", "#ff6bff"];
@@ -58,17 +61,12 @@ document.getElementById('add-psa').addEventListener('click', () => {
 
 document.getElementById('save-new-psa').addEventListener('click', () => {
     const title = document.getElementById('psa-title').value;
-    const script = document.getElementById('psa-script').value;
+    const script = document.getElementById('psa-script-table').innerHTML;
 
     if (title && script) {
         const newPSA = {
             title: title,
-            script: `
-            <tr>
-                <td><strong>Scene 1:</strong> ${title}</td>
-                <td>${script}</td>
-            </tr>
-            `,
+            script: script,
             color: colors[psas.length % colors.length]
         };
 
@@ -77,7 +75,11 @@ document.getElementById('save-new-psa').addEventListener('click', () => {
         displayPSAs();
         
         document.getElementById('psa-title').value = '';
-        document.getElementById('psa-script').value = '';
+        document.getElementById('psa-script-table').innerHTML = `
+            <tr>
+                <td><strong>Scene 1:</strong></td>
+                <td contenteditable="true">Enter script content here...</td>
+            </tr>`;
         document.getElementById('new-psa-form').classList.add('hidden');
     }
 });
@@ -86,8 +88,6 @@ function toggleScript(index) {
     const scriptDiv = document.getElementById(`script-${index}`);
     if (scriptDiv.classList.contains('hidden')) {
         scriptDiv.classList.remove('hidden');
-        scriptDiv.style.width = "100%"; // Ensure it takes full width
-        scriptDiv.style.height = "auto"; // Ensure it expands as needed
     } else {
         scriptDiv.classList.add('hidden');
     }
@@ -116,16 +116,21 @@ function handleEnterKey(event, index) {
         event.preventDefault();
         
         const table = document.querySelector(`#script-${index} table`);
+        const selection = window.getSelection();
+        const range = selection.getRangeAt(0);
+        const selectedNode = range.startContainer.nodeType === 3 ? range.startContainer.parentNode : range.startContainer;
+        const currentRow = selectedNode.closest('tr');
+        
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
             <td contenteditable="true"><strong>New Scene:</strong></td>
             <td contenteditable="true">"New script content..."</td>
         `;
-        table.appendChild(newRow);
+        
+        currentRow.parentNode.insertBefore(newRow, currentRow.nextSibling);
         
         showSaveButton(index);
     }
 }
 
 document.addEventListener('DOMContentLoaded', fetchPSAs);
-
