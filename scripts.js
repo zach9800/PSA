@@ -46,8 +46,9 @@ function displayPSAs() {
                         <table contenteditable="true" onkeydown="handleEnterKey(event, ${index})" oninput="showSaveButton(${index})">${psa.script}</table>
                     </div>
                     <button id="save-${index}" class="save-btn hidden" onclick="savePSA(${index})">Save</button>
+                    <button id="toggle-comments-${index}" class="toggle-comments-btn" onclick="toggleComments(${index})">Show/Hide Comments</button>
                 </div>
-                <div id="comments-${index}" class="comments-box">
+                <div id="comments-${index}" class="comments-box hidden"> <!-- Hidden by default -->
                     <h4>Comments</h4>
                     <div contenteditable="true" class="comment-input">Add your comment here...</div>
                     <button class="save-comment-btn" onclick="saveComment(${index})">Save Comment</button>
@@ -59,6 +60,11 @@ function displayPSAs() {
         `;
         psaList.appendChild(psaItem);
     });
+}
+
+function toggleComments(index) {
+    const commentsDiv = document.getElementById(`comments-${index}`);
+    commentsDiv.classList.toggle("hidden");
 }
 
 document.getElementById("add-psa").addEventListener("click", () => {
@@ -74,12 +80,23 @@ document.getElementById("add-psa").addEventListener("click", () => {
     `;
     document.getElementById("psa-script").innerHTML = scriptTable;
 
-    // Apply a border color to the PSA script container
-    const color = colors[psas.length % colors.length];
-    document.getElementById("psa-script-container").style.borderColor = color;
+    // Select the script container element
+    const scriptContainer = document.getElementById("psa-script-container");
+    if (scriptContainer) {
+        // Apply a border color to the PSA script container if the element exists
+        const color = colors[psas.length % colors.length];
+        scriptContainer.style.borderColor = color;
+    } else {
+        console.error("psa-script-container not found!");
+    }
 
     // Initialize the comment area with placeholder text
-    document.querySelector(".comment-input").innerText = "Add your comment here...";
+    const commentInput = document.querySelector(".comment-input");
+    if (commentInput) {
+        commentInput.innerText = "Add your comment here...";
+    } else {
+        console.error("Comment input not found!");
+    }
 
     document.getElementById("new-psa-form").classList.remove("hidden");
 });
@@ -181,39 +198,3 @@ async function savePSAToFirebase(psa) {
 }
 
 document.addEventListener("DOMContentLoaded", fetchPSAs);
-
-function displayPSAs() {
-    const psaList = document.getElementById("psa-list");
-    psaList.innerHTML = "";
-
-    psas.forEach((psa, index) => {
-        const psaItem = document.createElement("div");
-        psaItem.className = "psa-item";
-        psaItem.innerHTML = `
-            <div class="psa-content-wrapper">
-                <div class="psa-content">
-                    <h3 class="psa-title-saved">${psa.title}</h3>
-                    <div id="script-${index}" class="script-box" style="border-color: ${psa.color};">
-                        <table contenteditable="true" onkeydown="handleEnterKey(event, ${index})" oninput="showSaveButton(${index})">${psa.script}</table>
-                    </div>
-                    <button id="save-${index}" class="save-btn hidden" onclick="savePSA(${index})">Save</button>
-                    <button id="toggle-comments-${index}" class="toggle-comments-btn" onclick="toggleComments(${index})">Show/Hide Comments</button>
-                </div>
-                <div id="comments-${index}" class="comments-box">
-                    <h4>Comments</h4>
-                    <div contenteditable="true" class="comment-input">Add your comment here...</div>
-                    <button class="save-comment-btn" onclick="saveComment(${index})">Save Comment</button>
-                    <div class="comment-list" id="comment-list-${index}">
-                        ${psa.comments.map(comment => `<div class="comment-item">${comment}</div>`).join('')}
-                    </div>
-                </div>
-            </div>
-        `;
-        psaList.appendChild(psaItem);
-    });
-}
-
-function toggleComments(index) {
-    const commentsDiv = document.getElementById(`comments-${index}`);
-    commentsDiv.classList.toggle("hidden");
-}
