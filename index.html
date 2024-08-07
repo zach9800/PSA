@@ -7,28 +7,24 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>PSA Showcase</h1>
-    </header>
-
-    <section id="psa-list">
-        <!-- PSA content will be dynamically inserted here -->
-    </section>
-
-    <button id="add-psa">Add New PSA</button>
-
-    <!-- Form for creating a new PSA -->
-    <div id="new-psa-form" class="hidden">
-        <input type="text" id="psa-title" placeholder="Enter PSA Title">
-        <textarea id="psa-script" placeholder="Enter PSA Script"></textarea>
-        <button id="save-new-psa">Save PSA</button>
+    <div id="bl-main" class="bl-main">
+        <section>
+            <div class="bl-box">
+                <h2>PSA Scripts</h2>
+            </div>
+            <div class="bl-content">
+                <div id="psa-list" class="bl-panel-items"></div>
+            </div>
+        </section>
     </div>
 
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-    <!-- Your custom scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
     <script src="scripts.js"></script>
+    <script>
+        $(document).ready(function () {
+            Boxlayout.init();
+        });
+    </script>
 </body>
 </html>
