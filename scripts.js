@@ -110,23 +110,6 @@ async function savePSA(index) {
     }
 }
 
-// Add a new PSA
-document.getElementById('add-psa').addEventListener('click', () => {
-    const newColor = colors[psas.length % colors.length]; // Rotate through colors
-    const newPSA = {
-        title: "New PSA Title",
-        script: `
-        <tr>
-            <td contenteditable="true"><strong>New Scene:</strong> New Scene Title</td>
-            <td contenteditable="true">"New script content..."</td>
-        </tr>
-        `,
-        color: newColor
-    };
-    psas.push(newPSA);
-    savePSAToFirebase(newPSA);
-    displayPSAs();
-});
-
 // Fetch PSAs on page load
 document.addEventListener('DOMContentLoaded', fetchPSAs);
+
