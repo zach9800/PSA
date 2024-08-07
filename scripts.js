@@ -97,23 +97,36 @@ async function savePSA(index) {
     const script = document.querySelector(`#script-${index} table`).innerHTML;
 
     psas[index].title = title;
-    psas[index].script = script;
+    psas[index.script] = script;
 
     try {
         await db.collection("psas").doc(psas[index].title).set(psas[index]);
         const saveBtn = document.getElementById(`save-${index}`);
         saveBtn.classList.add('hidden');
+        alert("PSA saved successfully!");
     } catch (error) {
         console.error("Error saving PSA:", error);
+        alert("Failed to save PSA. Please try again.");
     }
 }
 
-// Add a new PSA (assuming you have a function to handle this)
+// Add a new PSA
 document.getElementById('add-psa').addEventListener('click', () => {
-    document.getElementById('new-psa-form').classList.toggle('hidden');
+    const newColor = colors[psas.length % colors.length]; // Rotate through colors
+    const newPSA = {
+        title: "New PSA Title",
+        script: `
+        <tr>
+            <td contenteditable="true"><strong>New Scene:</strong> New Scene Title</td>
+            <td contenteditable="true">"New script content..."</td>
+        </tr>
+        `,
+        color: newColor
+    };
+    psas.push(newPSA);
+    savePSAToFirebase(newPSA);
+    displayPSAs();
 });
 
 // Fetch PSAs on page load
 document.addEventListener('DOMContentLoaded', fetchPSAs);
-
-
