@@ -1,13 +1,13 @@
 /* Basic styles for the PSA page */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f4f9ff; /* Light blue background */
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #4CAF50;
+    background-color: #1e90ff; /* Cool blue for the header */
     color: white;
     text-align: center;
     padding: 20px 0;
@@ -26,7 +26,7 @@ h1 {
 
 .psa-item {
     background-color: white;
-    border: 2px solid #ddd;
+    border: 2px solid #1e90ff; /* Cool blue for the border */
     margin-bottom: 20px;
     padding: 15px;
     border-radius: 8px;
@@ -46,7 +46,7 @@ h1 {
     max-width: 600px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -55,12 +55,12 @@ h1 {
     width: 100%;
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #1e90ff; /* Cool blue for the input border */
     border-radius: 4px;
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #1e90ff; /* Cool blue for buttons */
     color: white;
     border: none;
     padding: 10px 20px;
@@ -70,5 +70,5 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #4682b4; /* Slightly darker blue on hover */
 }
