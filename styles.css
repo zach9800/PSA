@@ -1,41 +1,43 @@
-/* Basic styles for the PSA page */
+/* Modern Minimalist Style */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f9ff; /* Light blue background */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f0f0; /* Light gray background */
+    color: #333; /* Dark gray text */
     margin: 0;
     padding: 0;
 }
 
 header {
-    background-color: #1e90ff; /* Cool blue for the header */
+    background-color: #2c3e50; /* Dark blue-gray header */
     color: white;
     text-align: center;
-    padding: 20px 0;
+    padding: 30px 0;
+    font-size: 2.5em;
 }
 
 h1 {
     margin: 0;
-    font-size: 2em;
+    font-weight: 300;
 }
 
 #psa-list {
-    padding: 20px;
+    padding: 40px;
     max-width: 900px;
     margin: 0 auto;
 }
 
 .psa-item {
-    background-color: white;
-    border: 2px solid #1e90ff; /* Cool blue for the border */
+    background-color: #ffffff; /* White background for items */
+    border: 1px solid #dcdcdc; /* Light gray border */
     margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s ease;
 }
 
 .psa-item:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .hidden {
@@ -44,31 +46,33 @@ h1 {
 
 #new-psa-form {
     max-width: 600px;
-    margin: 20px auto;
+    margin: 30px auto;
     padding: 20px;
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
 
 #new-psa-form input, #new-psa-form textarea {
     width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #1e90ff; /* Cool blue for the input border */
-    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #dcdcdc; /* Light gray border */
+    border-radius: 5px;
+    font-size: 1em;
 }
 
 button {
-    background-color: #1e90ff; /* Cool blue for buttons */
+    background-color: #3498db; /* Bright blue button */
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 15px 25px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1em;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #4682b4; /* Slightly darker blue on hover */
+    background-color: #2980b9; /* Darker blue on hover */
 }
