@@ -95,3 +95,34 @@ button:hover {
     display: none;
 }
 
+.script-box {
+    margin-top: 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: nowrap;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 5px 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.save-btn {
+    margin-top: 10px;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.save-btn:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
